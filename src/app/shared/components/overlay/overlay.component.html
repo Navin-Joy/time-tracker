@@ -1,0 +1,26 @@
+<div class="mb-3 px-3">
+    <!-- Header -->
+    <div *ngIf="overLayContent?.title">
+        <h2 mat-dialog-title>
+            {{overLayContent?.title}}
+        </h2>
+    </div>
+
+    <!-- Body -->
+    <div *ngIf="(overLayContent.body | typeOf) === 'string';else renderTemplate" mat-dialog-content>
+        {{overLayContent?.body}}
+    </div>
+
+    <ng-template mat-dialog-content class="pb-2" #renderTemplate>
+        <ng-container [ngTemplateOutlet]="overLayContent.body" [ngTemplateOutletContext]="overLayContent?.body">
+        </ng-container>
+    </ng-template>
+
+    <!-- Confirm and Cancel Button -->
+    <div mat-dialog-actions [align]="'start'" *ngIf="overLayContent.confirmText || overLayContent.cancelText">
+        <button mat-raised-button class="btn-primary mr-2" *ngIf="overLayContent.confirmText"
+            [mat-dialog-close]="true">{{overLayContent.confirmText}}</button>
+        <button mat-raised-button class="btn-secondary" *ngIf="overLayContent.cancelText"
+            [mat-dialog-close]="false">{{overLayContent.cancelText}}</button>
+    </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="custom-card py-4 px-5 mb-4">
+    <div class="flex items-center text-xl font-medium">
+        <div class="w-3/5">
+            {{taskDetails.taskName}}
+        </div>
+        <div class="w-2/5 flex justify-between items-center left-division">
+            <span class="text-primary">
+                <span *ngIf="isActive; else inactiveTimer">
+                    {{(taskDetails.timeRecorded + timerValue) | duration}}
+                </span>
+                <ng-template #inactiveTimer>
+                    {{(taskDetails.timeRecorded ) | duration}}
+                </ng-template>
+            </span>
+
+            <!-- buttons -->
+            <span>
+                <button *ngIf="!isActive; else inactiveBtn" class="btn-primary" (click)="onTaskAction('start')"> Start
+                </button>
+                <ng-template #inactiveBtn>
+                    <button class="btn-danger" (click)="onTaskAction('stop')"> Stop </button>
+                </ng-template>
+                <button class="btn-secondary ml-3 btn-circle" (click)="onTaskAction('delete')"> X </button>
+            </span>
+
+        </div>
+    </div>
+
+    <div class="my-2">
+        <div class="font-medium text-black mb-1"> History </div>
+
+        <div class="font-normal history-color">
+
+            <!-- if history is available -->
+            <ng-container *ngIf="taskDetails.history.length; else emptyHistory">
+                <div *ngFor="let history of taskDetails.history | reverse">
+                    Started the timer at {{history.startTime | date: "dd/mm/yyy hh:mm:ss"}}
+                    <span *ngIf="history.endTime; else activeContent">
+                        & Stopped at {{history.endTime | date: "dd/mm/yyy hh:mm:ss"}}
+                    </span>
+                    <ng-template #activeContent> (Active) </ng-template>
+                </div>
+            </ng-container>
+
+            <!-- if history is not available -->
+            <ng-template #emptyHistory> No History Found, Click on the start button to track the timer </ng-template>
+
+        </div>
+
+    </div>
+</div>

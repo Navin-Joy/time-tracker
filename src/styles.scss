@@ -1,1 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/variables.scss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+    height: 100%;
+}
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    color: var(--base-font-color);
+}
+
+.custom-container {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.custom-bg {
+    background-color: var(--bg-color);
+    height: calc(100vh - 60px);
+}
+
+.text-primary {
+    color: var(--primary-color);
+}
+
+.text-secondary {
+    color: var(--secondary-color);
+}
+
+.remove-highlight {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.remove-highlight:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+}
+
+.btn {
+    @extend .remove-highlight;
+    height: 40px;
+    text-align: center;
+    border-radius: 57px;
+    padding: 13px 48px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 100%;
+    color: white;
+}
+
+.btn-primary {
+    @extend .btn;
+    background-color: var(--primary-color);
+}
+
+.btn-secondary {
+    @extend .btn;
+    background-color: var(--secondary-color);
+}
+
+.btn-danger {
+    @extend .btn;
+    background-color: var(--danger-color);
+}
+
+.btn-circle {
+    @extend .btn;
+    border-radius: 100%;
+    padding: 13px 16px;
+    color: #00000099;
+}
+
+.custom-popup .mat-dialog-container {
+    background: white;
+    border-radius: 25px;
+}
+
+.custom-backdrop {
+    background-color: var(--backdrop-color);
+}
